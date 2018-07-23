@@ -1,0 +1,91 @@
+{% extends "../base.html" %}
+
+{% block body %}
+<div class="main_box new_order">
+    <h2><span></span>用户管理</h2>
+
+    <div class="cont_box">
+        <div class="search_formbox clearfix">
+            <a href="{% url 'books_new' %}" class="btn blue_btn curr">
+                <i class="fa fa-edit"></i><span>添加</span>
+            </a>
+        </div>
+
+{#        <form method="get" action="{{ path('backend_device_search') }}">#}
+{#            <div class="search_box clearfix">#}
+{#                <label class="f_left">搜索设备：</label>#}
+{#                <input type="search" class="f_left search_input" name="searchParam" placeholder="输入设备序列号/运营人账号|电话"/>#}
+{#                <input type="submit" value="搜索" class="btn blue_btn"/>#}
+{#            </div>#}
+{#        </form>#}
+    </div>
+
+    <div class="cont_box">
+        <table border="0" cellspacing="0" cellpadding="0" class="table" id="table_box">
+            <thead>
+                <tr>
+                    <th>用户ID</th>
+                    <th>用户名</th>
+                    <th>身份ID</th>
+                    <th>手机/邮箱</th>
+                    <th class="">积分值</th>
+                    <th class="">信用值</th>
+                    <th>操作信息</th>
+                    <th class="w200">操作</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for user in user_list %}
+                    <tr>
+                        <td class="center">{{ user.user_id }}</td>
+                        <td class="center">
+                            {% if user.user_name %}
+                                {{ user.user_name  }}<br/>
+                            {% endif %}
+                        </td>
+                        <td class="center">
+                            {% if user.blockchain_id %}
+                                {{ user.blockchain_id  }}<br/>
+                            {% endif %}
+                        <td class="">
+                            {% if user.mobile %}
+                                <span class="green">手机：</span>{{ user.mobile  }}<br/>
+                            {% endif %}
+                            {% if user.email %}
+                                <span class="green">邮箱：</span>{{ user.email  }}<br/>
+                            {% endif %}
+                        </td>
+                        <td class="center green">
+                            {% if user.scores %}
+                                {{ user.scores | floatformat:"8" }}
+                            {% endif %}
+                        </td>
+                        <td class="center orange">
+                            {% if user.credits %}
+                                {{ user.credits | floatformat:"8" }}
+                            {% endif %}
+                        </td>
+                        <td class="center">
+                            创建时间：{{ user.create_time  }}<br/>
+                            更新时间：{{ user.update_time  }}<br/>
+                            {% if user.comment %}
+                                备注：{{ user.comment }}
+                            {% endif %}
+                        </td>
+                        <td class="center">
+                            <a href="{% url 'books_edit' book_id=user.user_id %}" class="table_btn table_warning">
+                                <i class="fa fa-edit"></i><span>编辑</span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{#    <div class="txtCenter">#}
+{#        {{ knp_pagination_render(pagination) }}#}
+{#    </div>#}
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "../base.html" %}
+
+{% block body %}
+<div class="main_box new_order">
+    <h2><span></span>订单管理</h2>
+
+    <div class="cont_box">
+        <div class="search_formbox clearfix">
+            <a href="{% url 'books_new' %}" class="btn blue_btn curr">
+                <i class="fa fa-edit"></i><span>添加</span>
+            </a>
+        </div>
+
+{#        <form method="get" action="{{ path('backend_device_search') }}">#}
+{#            <div class="search_box clearfix">#}
+{#                <label class="f_left">搜索设备：</label>#}
+{#                <input type="search" class="f_left search_input" name="searchParam" placeholder="输入设备序列号/运营人账号|电话"/>#}
+{#                <input type="submit" value="搜索" class="btn blue_btn"/>#}
+{#            </div>#}
+{#        </form>#}
+    </div>
+
+    <div class="cont_box">
+        <table border="0" cellspacing="0" cellpadding="0" class="table" id="table_box">
+            <thead>
+                <tr>
+                    <th>订单ID</th>
+                    <th>订单编号</th>
+                    <th class="">借阅信息</th>
+                    <th class="">归还信息</th>
+                    <th class="">支付信息</th>
+                    <th class="">操作信息</th>
+                    <th class="w200">操作</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for order in order_list %}
+                    <tr>
+                        <td class="center">{{ order.order_id }}</td>
+                        <td class="center">{{ order.order_sn }}</td>
+                        <td class="">
+                            {% if order.user_id %}
+                                <span class="green">用户：</span>{{ order.user_id  }}<br/>
+                            {% endif %}
+                            {% if order.bins_id %}
+                                <span class="green">书实例ID：</span>{{ order.bins_id  }}<br/>
+                            {% endif %}
+                            {% if order.borrow_bcid %}
+                                <span class="green">借书时书柜ID：</span>{{ order.borrow_bcid  }}<br/>
+                            {% endif %}
+                            {% if order.borrow_begintm %}
+                                <span class="green">借阅开始时间：</span>{{ order.borrow_begintm  }}<br/>
+                            {% endif %}
+                        </td>
+                        <td class="">
+                            {% if order.borrow_endtm %}
+                                <span class="green">借阅结束时间：</span>{{ order.borrow_endtm  }}<br/>
+                            {% endif %}
+                            {% if order.user_id %}
+                                <span class="green">借阅天数：</span>{{ order.borrow_days  }}<br/>
+                            {% endif %}
+                            {% if order.return_bcid %}
+                                <span class="green">还书时书柜ID：</span>{{ order.return_bcid  }}<br/>
+                            {% endif %}
+                        </td>
+                        <td class="">
+                            {% if order.should_points %}
+                                <span class="green">应扣积分：</span>{{ order.should_points  }}<br/>
+                            {% endif %}
+                            {% if order.favour_points %}
+                                <span class="green">优惠积分：</span>{{ order.favour_points  }}<br/>
+                            {% endif %}
+                            {% if order.actual_points %}
+                                <span class="green">应付积分：</span>{{ order.actual_points  }}<br/>
+                            {% endif %}
+                            {% if order.bonus_points %}
+                                <span class="green">奖励积分：</span>{{ order.bonus_points  }}<br/>
+                            {% endif %}
+                            {% if order.bonus_credits %}
+                                <span class="green">奖励信用：</span>{{ order.bonus_credits  }}<br/>
+                            {% endif %}
+                        </td>
+                        <td class="center">
+                            {% if order.order_state %}
+                                <span class="green">状态：</span>
+                                {% if order.order_state == 1 %}<span class="red">借阅中</span><br/>
+                                {% elif order.order_state == 2 %}<span class="green">已还书</span><br/>
+                                {% elif order.order_state == 90 %}<span class="green">已取消</span><br/>
+                                {% elif order.order_state == 100 %}<span class="green">已关闭</span><br/>
+                                {% endif %}
+                            {% endif %}
+                            {% if order.create_time %}
+                                创建时间：{{ order.create_time  }}<br/>
+                            {% endif %}
+                            {% if order.update_time %}
+                                更新时间：{{ order.update_time  }}<br/>
+                            {% endif %}
+                            {% if order.comment %}
+                                备注：{{ order.comment }}
+                            {% endif %}
+                        </td>
+                        <td class="center">
+                            <a href="{% url 'books_edit' book_id=order.order_id %}" class="table_btn table_warning">
+                                <i class="fa fa-edit"></i><span>编辑</span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{#    <div class="txtCenter">#}
+{#        {{ knp_pagination_render(pagination) }}#}
+{#    </div>#}
+</div>
+{% endblock %}

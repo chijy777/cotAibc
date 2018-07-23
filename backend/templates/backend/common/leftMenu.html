@@ -1,0 +1,37 @@
+{% url 'books_index' as books_index_url %}
+{% url 'bookcases_index' as bookcases_index_url %}
+{% url 'users_index' as users_index_url %}
+{% url 'orders_index' as orders_index_url %}
+
+<div class="main_left">
+    <h2><i class="menu_icon fa fa-reorder"></i></h2>
+    <ul class="menu">
+    <!--订单管理-->
+        <li>
+            <i class="menu_icon fa fa-file-text-o"></i>
+            <a href="javascript:void(0);" data-id="orders" data-href="{{ orders_index_url }}">订单管理</a>
+        </li>
+
+    <!--用户管理-->
+        <li>
+            <i class="menu_icon fa fa-vcard"></i>
+            <a href="javascript:void(0);" data-id="users" data-href="{{ users_index_url }}">用户管理</a>
+        </li>
+
+    <!--书柜管理-->
+        <li>
+            <i class="menu_icon fa fa-bars"></i>
+            <a href="javascript:void(0);" data-id="bookcases" data-href="{{ bookcases_index_url }}">书柜管理</a>
+        </li>
+
+    <!--书管理-->
+        <li>
+            <i class="menu_icon fa fa-book"></i>
+            <a href="javascript:void(0);" data-id="books" data-href="{{ books_index_url }}">书管理</a>
+        </li>
+        <li>
+            <i class="menu_icon fa fa-bookmark"></i>
+            <a href="javascript:void(0);" data-id="books" data-href="{{ books_index_url }}">书实例管理</a>
+        </li>
+    </ul>
+</div>

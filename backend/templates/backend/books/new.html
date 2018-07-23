@@ -1,0 +1,73 @@
+{% extends "../base.html" %}
+
+{% block body %}
+<div class="main_box">
+    <h2><span></span>添加</h2>
+
+    <div class="cont_box">
+        <div class="search_formbox clearfix">
+            <a href="{% url 'books_index' %}" class="btn blue_btn"><span>返回列表</span></a>
+        </div>
+    </div>
+
+    <div class="cont_box">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <ul class="addpro_box">
+                <li>
+                    <label>书ID：</label>
+                    {{ form.book_id }}
+                </li>
+                <li>
+                    <label>书名：</label>
+                    {{ form.book_name }}
+                </li>
+                <li>
+                    <label>作者：</label>
+                    {{ form.author }}
+                </li>
+                <li>
+                    <label>小图标：</label>
+                    {{ form.icon }}
+                </li>
+                <li>
+                    <label>出版社：</label>
+                    {{ form.press }}
+                </li>
+                <li>
+                    <label>出版日期：</label>
+                    {{ form.pub_date }}
+                </li>
+                <li>
+                    <label>页数：</label>
+                    {{ form.pages }}
+                </li>
+                <li>
+                    <label>定价：</label>
+                    {{ form.prices }}
+                </li>
+                <li>
+                    <label>ISDN：</label>
+                    {{ form.isdn }}
+                </li>
+                <li>
+                    <label>简介：</label>
+                    {{ form.brief }}
+                </li>
+                <li>
+                    <label>评分：</label>
+                    {{ form.scores }}
+                </li>
+                <li>
+                    <label>豆瓣链接：</label>
+                    {{ form.douban_url }}
+                </li>
+            </ul>
+
+            <div class="probtn_box clearfix">
+                <input type="submit" value="提  交" class="btn blue_btn"/>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
