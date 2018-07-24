@@ -8,9 +8,9 @@ from backend.forms import BookEditForm
 
 logger = logging.getLogger(__name__)
 
+
 def index(request):
     return render_to_response('backend/index.html')
-
 
 class BaseMixin(object):
     def get_context_data(self, *args, **kwargs):
@@ -49,7 +49,6 @@ class BooksView(BaseMixin, ListView):
     paginate_by = settings.PAGE_NUM     # 分页--每页的数目
 
     def get_context_data(self, **kwargs):
-        # # 轮播
         # kwargs['carousel_page_list'] = Books.objects.all()
         return super(BooksView, self).get_context_data(**kwargs)
 
@@ -64,9 +63,7 @@ class BooksView(BaseMixin, ListView):
             if form.is_valid():
                 print(form.cleaned_data)
                 # book.save()
-                # return HttpResponseRedirect(
-                #     reverse('niji:topic', kwargs={'bid': t.pk})
-                # )
+                return render(request, 'backend/books/index.html')
         else:
             form = BookEditForm()
         return render( request, 'backend/books/new.html', {'form': form, } )

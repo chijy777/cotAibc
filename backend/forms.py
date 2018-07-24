@@ -3,6 +3,9 @@ from django.forms import ModelForm
 
 
 class BookEditForm(ModelForm):
+    """
+    Books
+    """
     def __init__(self, *args, **kwargs):
         super(BookEditForm, self).__init__(*args, **kwargs)
 

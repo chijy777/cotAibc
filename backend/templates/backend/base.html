@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿{% load staticfiles %}
+
+<!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -11,8 +13,8 @@
 	</title>
 
     {% block stylesheets %}
-		<link type="text/css" rel="stylesheet" href="/static/css/style.css">
-        <link type="text/css" rel="stylesheet" href="/static/fontsawesome/css/font-awesome.css">
+        <link type="text/css" rel="stylesheet" href="{% static 'backend/fontsawesome/css/font-awesome.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'backend/css/style.css' %}">
 {#		<link type="text/css" rel="stylesheet" href="{{ asset('WebAsset/AssetLib/Uploadify/uploadify.css') }}">#}
     {% endblock %}
 
@@ -20,19 +22,20 @@
     {% endblock %}
 </head>
 
+
 <body>
-{% block body %}
-{% endblock %}
+    {% block body %}
+    {% endblock %}
 </body>
 
-{% block javascript %}
-    <script type="text/javascript" src="/static/js/jQuery/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="/static/js/tipSuppliers.js"></script>
-    <script type="text/javascript" src="/static/js/ahn.js"></script>
-    {#<script src="{{ asset('WebAsset/WebBundle/Backend/js/other.js') }}"></script>#}
-{% endblock %}
+    {% block javascript %}
+        <script type="text/javascript" src="{% static 'backend/js/jquery-1.11.1.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'backend/js/tipSuppliers.js' %}"></script>
+        <script type="text/javascript" src="{% static 'backend/js/ahn.js' %}"></script>
+{#        <script type="text/javascript" src="/static/js/other.js"></script>#}
+    {% endblock %}
 
-{% block js %}
-{% endblock %}
+    {% block js %}
+    {% endblock %}
 </body>
 </html>

@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, DetailView
 
 
 urlpatterns = [
-    url(r'^$', index ),
+    url(r'^$', index, name='backend_index' ),
 
     url(r'^books$', BooksView.as_view(), name='books_index'),
     url(r'^books/new/$', BooksView.new, name='books_new'),
@@ -16,4 +16,3 @@ urlpatterns = [
 
     url(r'^orders$', OrdersView.as_view(), name='orders_index'),
 ]
-
