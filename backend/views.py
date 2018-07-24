@@ -1,6 +1,7 @@
 import logging
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
+from django.urls import reverse
 from django.views.generic import ListView
 from cotAibc import settings
 from backend.models import Books, Bookcases, Users, Orders
@@ -19,30 +20,14 @@ class BaseMixin(object):
             # 网站标题等内容
             context['website_title'] = settings.WEBSITE_TITLE
             context['website_welcome'] = settings.WEBSITE_WELCOME
-            # # 热门文章
-            # context['hot_article_list'] = Article.objects.order_by("-view_times")[0:10]
-            # # 导航条
-            # context['nav_list'] = Nav.objects.filter(status=0)
-            # # 最新评论
-            # context['latest_comment_list'] = Comment.objects.order_by("-create_time")[0:10]
-            # # 友情链接
-            # context['links'] = Link.objects.order_by('create_time').all()
-            # colors = ['primary', 'success', 'info', 'warning', 'danger']
-            # for index, link in enumerate(context['links']):
-            #     link.color = colors[index % len(colors)]
-            # # 用户未读消息数
-            # user = self.request.user
-            # if user.is_authenticated():
-            #     context['notification_count'] = user.to_user_notification_set.filter(is_read=0).count()
         except Exception as e:
             logger.error(u'[BaseMixin]加载基本信息出错！')
         return context
 
 
-
 class BooksView(BaseMixin, ListView):
     """
-    Book
+    Book query/edit/add.
     """
     template_name = 'backend/books/index.html'
     context_object_name = 'book_list'
@@ -61,29 +46,25 @@ class BooksView(BaseMixin, ListView):
         if request.method == 'POST':
             form = BookEditForm(request.POST)
             if form.is_valid():
-                print(form.cleaned_data)
-                # book.save()
-                return render(request, 'backend/books/index.html')
+                form.save()
+                return HttpResponseRedirect('/backend/books/')
         else:
             form = BookEditForm()
         return render( request, 'backend/books/new.html', {'form': form, } )
 
     # @login_required
     def edit(request, book_id=0):
-        print(request)
         book = Books.objects.get(book_id=book_id)
         if not book:
             logger.error(u'[Book]未找到记录！')
-            # return HttpResponseForbidden(_('Editing is not allowed when topic has been replied'))
-        print(book, book.book_id, book.book_name, book_id)
+
+        # print(request)
+        # print(book, book.book_id, book.book_name, book_id)
         if request.method == 'POST':
             form = BookEditForm(request.POST, instance=book)
             if form.is_valid():
-                print(form.cleaned_data)
-                # book.save()
-                # return HttpResponseRedirect(
-                #     reverse('niji:topic', kwargs={'bid': t.pk})
-                # )
+                form.save()
+                return HttpResponseRedirect('/backend/books/')
         else:
             form = BookEditForm(instance=book)
         return render( request, 'backend/books/edit.html', {'form': form, } )
@@ -92,7 +73,7 @@ class BooksView(BaseMixin, ListView):
 
 class BookcasesView(BaseMixin, ListView):
     """
-    Bookcases.
+    Bookcases query/edit/add.
     """
     template_name = 'backend/bookcases/index.html'
     context_object_name = 'bookcase_list'
@@ -108,7 +89,7 @@ class BookcasesView(BaseMixin, ListView):
 
 class UsersView(BaseMixin, ListView):
     """
-    Users.
+    Users query/edit/add.
     """
     template_name = 'backend/users/index.html'
     context_object_name = 'user_list'
@@ -121,10 +102,9 @@ class UsersView(BaseMixin, ListView):
         return user_list
 
 
-
 class OrdersView(BaseMixin, ListView):
     """
-    Orders.
+    Orders query/edit/add.
     """
     template_name = 'backend/orders/index.html'
     context_object_name = 'order_list'

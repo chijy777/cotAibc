@@ -1,13 +1,22 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+
 
 class BookInstance(models.Model):
     bins_id = models.AutoField(primary_key=True)
+    bins_no = models.CharField(max_length=20, blank=True, null=True)
     rfid_sn = models.CharField(max_length=255)
     blockchain_id = models.CharField(max_length=255, blank=True, null=True)
     book_id = models.IntegerField()
     bc_id = models.IntegerField(blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
-    state = models.IntegerField(blank=True, null=True)
+    state = models.IntegerField(blank=True, null=True, default=1)
     create_time = models.IntegerField(blank=True, null=True)
     update_time = models.IntegerField(blank=True, null=True)
     oper_id = models.IntegerField(blank=True, null=True)
@@ -20,12 +29,12 @@ class BookInstance(models.Model):
 
 class Bookcases(models.Model):
     bc_id = models.AutoField(primary_key=True)
-    bc_no = models.CharField(max_length=10, blank=True, null=True)
+    bc_no = models.CharField(max_length=20, blank=True, null=True)
     bc_sn = models.CharField(max_length=30, blank=True, null=True)
     blockchain_id = models.CharField(max_length=255, blank=True, null=True)
     address_detail = models.CharField(max_length=255, blank=True, null=True)
     address_pos = models.CharField(max_length=255, blank=True, null=True)
-    state = models.IntegerField(blank=True, null=True)
+    state = models.IntegerField(blank=True, null=True, default=1)
     oper_id = models.IntegerField(blank=True, null=True)
     create_time = models.IntegerField(blank=True, null=True)
     update_time = models.IntegerField(blank=True, null=True)
@@ -46,10 +55,10 @@ class Books(models.Model):
     pages = models.IntegerField(blank=True, null=True)
     prices = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     isdn = models.CharField(max_length=50, blank=True, null=True)
-    brief = models.CharField(max_length=1024, blank=True, null=True)
+    brief = models.TextField(blank=True, null=True)
     scores = models.CharField(max_length=10, blank=True, null=True)
     douban_url = models.CharField(max_length=512, blank=True, null=True)
-    state = models.IntegerField(blank=True, null=True)
+    state = models.IntegerField(blank=True, null=True, default=1)
     oper_id = models.IntegerField(blank=True, null=True)
     create_time = models.IntegerField(blank=True, null=True)
     update_time = models.IntegerField(blank=True, null=True)
@@ -93,7 +102,7 @@ class Orders(models.Model):
     bonus_points = models.DecimalField(max_digits=24, decimal_places=12, blank=True, null=True)
     bonus_credits = models.IntegerField(blank=True, null=True)
     order_state = models.IntegerField()
-    state = models.IntegerField(blank=True, null=True)
+    state = models.IntegerField(blank=True, null=True, default=1)
     oper_id = models.IntegerField(blank=True, null=True)
     create_time = models.IntegerField(blank=True, null=True)
     update_time = models.IntegerField(blank=True, null=True)
@@ -106,7 +115,7 @@ class Orders(models.Model):
 
 class Users(models.Model):
     user_id = models.AutoField(primary_key=True)
-    user_type = models.IntegerField()
+    user_type = models.IntegerField(blank=True, null=True)
     user_name = models.CharField(max_length=50, blank=True, null=True)
     mobile = models.CharField(max_length=50)
     land_passwd = models.CharField(max_length=100)
@@ -123,7 +132,7 @@ class Users(models.Model):
     user_degree = models.IntegerField(blank=True, null=True)
     user_desc = models.CharField(max_length=255, blank=True, null=True)
     last_login_time = models.IntegerField(blank=True, null=True)
-    state = models.IntegerField(blank=True, null=True)
+    state = models.IntegerField(blank=True, null=True, default=1)
     oper_id = models.IntegerField(blank=True, null=True)
     create_time = models.IntegerField(blank=True, null=True)
     update_time = models.IntegerField(blank=True, null=True)

@@ -1,8 +1,7 @@
 from backend.models import Books
-from django.forms import ModelForm
+from django import forms
 
-
-class BookEditForm(ModelForm):
+class BookEditForm(forms.ModelForm):
     """
     Books
     """
