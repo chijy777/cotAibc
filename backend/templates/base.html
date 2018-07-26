@@ -13,9 +13,8 @@
 	</title>
 
     {% block stylesheets %}
-        <link type="text/css" rel="stylesheet" href="{% static 'backend/fontsawesome/css/font-awesome.css' %}">
-        <link type="text/css" rel="stylesheet" href="{% static 'backend/css/style.css' %}">
-{#		<link type="text/css" rel="stylesheet" href="{{ asset('WebAsset/AssetLib/Uploadify/uploadify.css') }}">#}
+        <link type="text/css" rel="stylesheet" href="{% static 'fontsawesome/css/font-awesome.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
     {% endblock %}
 
     {% block css %}
@@ -29,10 +28,8 @@
 </body>
 
     {% block javascript %}
-        <script type="text/javascript" src="{% static 'backend/js/jquery-1.11.1.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'backend/js/tipSuppliers.js' %}"></script>
-        <script type="text/javascript" src="{% static 'backend/js/ahn.js' %}"></script>
-{#        <script type="text/javascript" src="/static/js/other.js"></script>#}
+        <script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/tipSuppliers.js' %}"></script>
     {% endblock %}
 
     {% block js %}

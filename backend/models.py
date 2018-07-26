@@ -49,7 +49,8 @@ class Books(models.Model):
     book_id = models.AutoField(primary_key=True)
     book_name = models.CharField(max_length=255, blank=True, null=True)
     author = models.CharField(max_length=255, blank=True, null=True)
-    icon = models.CharField(max_length=255, blank=True, null=True)
+    # icon = models.CharField(max_length=255, blank=True, null=True)
+    icon = models.ImageField(upload_to='books', max_length=255, blank=True, null=True)
     press = models.CharField(max_length=50, blank=True, null=True)
     pub_date = models.CharField(max_length=30, blank=True, null=True)
     pages = models.IntegerField(blank=True, null=True)
@@ -67,6 +68,7 @@ class Books(models.Model):
     class Meta:
         managed = False
         db_table = 'books'
+
 
 
 class OrderLog(models.Model):

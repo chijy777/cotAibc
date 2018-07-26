@@ -90,18 +90,10 @@ DATABASES = {
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
 
@@ -109,6 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 LANGUAGE_CODE = 'zh-Hans'
 TIME_ZONE = 'Asia/Shanghai'
+
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -117,13 +110,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static')
 # STATICFILES_DIRS = (
 #     ('css',os.path.join(STATIC_ROOT,'css').replace('\\','/') ),
 #     ('js',os.path.join(STATIC_ROOT,'js').replace('\\','/') ),
 #     ('images',os.path.join(STATIC_ROOT,'images').replace('\\','/') ),
 #     ('upload',os.path.join(STATIC_ROOT,'upload').replace('\\','/') ),
 # )
+
+# [上传路径]配置
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media').replace('\\', '/') # media即为图片上传的根路径
 
 
 # [内容]配置，网站标题等
@@ -133,3 +132,4 @@ BACKEND_TITLE = u'COT智能书柜-管理系统'
 
 # [分页]配置
 PAGE_NUM = 5
+

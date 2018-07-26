@@ -1,0 +1,222 @@
+{% extends "../base.html" %}
+{% load staticfiles %}
+
+{% block body %}
+<div class="main_box">
+    <h2><span></span>编辑</h2>
+
+    <div class="cont_box">
+        <div class="search_formbox clearfix">
+            <a href="{% url 'books_index' %}" class="btn blue_btn"><span>返回列表</span></a>
+        </div>
+    </div>
+
+    <div class="cont_box">
+        <form action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <ul class="addpro_box">
+                <li>
+                    <label>书ID：</label>
+                    {{ form.book_id }}
+                </li>
+                <li>
+                    <label>书名：</label>
+                    {{ form.book_name }}
+                </li>
+                <li>
+                    <label>作者：</label>
+                    {{ form.author }}
+                </li>
+                <li>
+                    <label>出版社：</label>
+                    {{ form.press }}
+                </li>
+                <li>
+                    <label>出版日期：</label>
+                    {{ form.pub_date }}
+                </li>
+                <li>
+                    <label>页数：</label>
+                    {{ form.pages }}
+                </li>
+                <li>
+                    <label>定价：</label>
+                    {{ form.prices }}
+                </li>
+                <li>
+                    <label>ISDN：</label>
+                    {{ form.isdn }}
+                </li>
+                <li>
+                    <label>简介：</label>
+                    {{ form.brief }}
+                </li>
+                <li>
+                    <label>评分：</label>
+                    {{ form.scores }}
+                </li>
+                <li>
+                    <label>豆瓣链接：</label>
+                    {{ form.douban_url }}
+                </li>
+                <li>
+                    <label>图片：</label>
+                    {{ form.icon }}
+                </li>
+{#                <input type="file" name="img">#}
+{#                <li>#}
+{#                    <div lab="uploadFile">#}
+{#                        <label class="form-label">图片：</label>#}
+{#                        <span class="orange">格式(*.jpg,*.png)，大小(每张最大2M)，数量(1张)</span>#}
+{#                        <div class="formControls col-10">#}
+{#                            <input id="file_upload" type="file" multiple="true" class='btn btn_info'>#}
+{#                            <div id="uploadList">#}
+{#                                <ul class="cot-img">#}
+{#                                    <li path='' url='' id='up-pic'>#}
+{#                                        <img src='{{ form.icon.value }}' style='width:320px;height:200px;border:1px solid #c0c0c0'/>#}
+{#                                        <input type='hidden' name='icon' value='{{ form.icon.value }}'/>#}
+{#                                        <a href='javascript:;' class='pic_del btn btn_info'><span>删除图片</span></a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </li>#}
+            </ul>
+
+{#            <div class="demo-box">#}
+{#                <input id="file_upload" type="file" name="Filedata">#}
+{#                <div id="file_uploadQueue" class="uploadifyQueue"></div>#}
+{#                <p><span id="id_span_msg"></span></p>#}
+{#            </div>#}
+
+{#            <h1>Uploadify组件上传方式</h1>#}
+{#            <div class="demo-box">#}
+{#                <input id="file_upload" type="file" name="Filedata">#}
+{#                <div id="file_uploadQueue" class="uploadifyQueue"></div>#}
+{#                <p><a href="javascript:$('#file_upload').uploadifyUpload()">上传图片</a>#}
+{#                <a href="javascript:$('#file_upload').uploadifyClearQueue()">取消上传</a>#}
+{#                </p>#}
+{#                <p><span id="id_span_msg"></span></p>#}
+{#            </div>#}
+
+            <div class="probtn_box clearfix">
+                <input type="submit" value="提  交" class="btn blue_btn"/>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+    <link type="text/css" rel="stylesheet" href="{% static 'lib/Uploadify/uploadify.css' %}">
+    <script type="text/javascript" src="{% static 'lib/Uploadify/swfobject.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/Uploadify/jquery.uploadify.min.js' %}"></script>
+{##}
+{#    <link href="/static/plugin/uploadify_214/uploadify.css" type="text/css" rel="stylesheet" />  #}
+{#    <script type="text/javascript" src="/site_media/js/jquery.js"></script>  #}
+{#    <script type="text/javascript" src="/site_media/plugin/uploadify_214/swfobject.js"></script>  #}
+{#    <script type="text/javascript" src="/site_media/plugin/uploadify_214/jquery.uploadify.v2.1.4.min.js"></script>  #}
+
+{#    <script type="text/javascript">#}
+{#        $(document).ready(function() {#}
+{#              $('#file_upload').uploadify({#}
+{#                'uploader'  : '/static/lib/Uploadify/uploadify.swf',#}
+{#                'script'    : '{% url "upload_script" %}',#}
+{#                'cancelImg' : '/static/lib/Uploadify/cancel.png',#}
+{#                'folder'    : '/upload',#}
+{#                'auto'      : false,//#}
+{#                'multi': true,//设置可以上传多个文件#}
+{#                'queueSizeLimit':20,//设置可以同时20个文件#}
+{#                'removeCompleted':false,//#}
+{#                'sizeLimit':10240000,//设置上传文件大小单位kb#}
+{#                'fileExt':'*.jpg;*.gif;*.png',//设置上传文件类型为常用图片格式#}
+{#                'fileDesc':'Image Files',#}
+{#                'onInit': function () {},#}
+{#                'onError' : function (event,ID,fileObj,errorObj) {#}
+{#                        $('#id_span_msg').html("上传失败，错误码:"+errorObj.type+" "+errorObj.info);#}
+{#                    },#}
+{#                'onSelect': function (e, queueId, fileObj) {#}
+{#                    $('#id_span_msg').html("");#}
+{#                },#}
+{#                'onAllComplete': function (event, data) {#}
+{#                    if(data.filesUploaded>=1){#}
+{#                      $('#id_span_msg').html("上传成功！");#}
+{#                    }#}
+{#                }#}
+{#              });#}
+{#        });#}
+{#        </script>#}
+{#    <script type="text/javascript">#}
+
+{#    $(function() {#}
+{#          var file_name='';#}
+{#          console.log('1111111');#}
+{#          $('#file_upload').uploadify({#}
+{#              'script'    : '{% url "upload_script" %}',#}
+{#              'uploader'  : '/static/lib/Uploadify/uploadify.swf',//根据文件存放地址改变#}
+{#              'cancelImg' : '/static/lib/Uploadify/uploadify-cancel.png',//根据文件存放地址改变#}
+{#              'folder'    : '/upload',#}
+{#              'auto'      : true, //false,//#}
+{#              'multi': false,     //设置可以上传多个文件#}
+{#              'simUploadLimit':1,#}
+{#              'buttonText':'上传',#}
+{#              'removeCompleted':false,//#}
+{#              'sizeLimit':20000,          //设置上传文件大小单位kb#}
+{#              'fileExt':'*.jpg;*.png;', //设置上传文件类型为常用文档格式#}
+{#              'fileDesc':'支持文档格式',#}
+{#              'onInit': function () {},#}
+{#              'onError' : function (event,ID,fileObj,errorObj) {#}
+{#                      $('#id_span_msg').html("上传失败，错误码:"+errorObj.type+" "+errorObj.info);#}
+{#                  },#}
+{#              'onSelect': function (e, queueId, fileObj) {#}
+{#                  $('#id_span_msg').html("");#}
+{#              },#}
+{#              'onCancel'    : function(event,ID,fileObj,data) {#}
+{#                  $.post("/delete_uploadfile/", { delete_file: file_name } );#}
+{#                  file_name='';#}
+{#              },#}
+{#              'onComplete': function(event, ID, fileObj, response, data) {#}
+{#                  var result = eval ("(" + response + ")");#}
+{#                  file_name=result.save_name;#}
+{#              }#}
+{#          });#}
+{#    });#}
+    </script>
+
+    <script type="text/javascript">
+{#        $(function() {#}
+{#            <!-- 上传图片. -->#}
+{#            $('#file_upload').uploadify({#}
+{#                'formData'      : {'path' : './uploads'},#}
+{#                'fileTypeDesc'  : '上传文件',#}
+{#                'fileTypeExts'  : '*.jpg;*.png',#}
+{#                'swf'            : "{% static 'lib/Uploadify/uploadify.swf' %}",#}
+{#                'uploader'      : "{% url 'books_upload_img' %}",#}
+{#                'buttonText'    : '选择图片',#}
+{#                'fileSizeLimit' : '2000KB',#}
+{#                'uploadLimit'   : 3,    //上传文件数限制#}
+{#                'width'          : 65,#}
+{#                'height'         : 25,#}
+{#                'successTimeout': 10,   //等待服务器响应时间#}
+{#                'removeTimeout' : 0.2,  //成功显示时间#}
+{#                'onUploadSuccess' : function(file, data, response) {#}
+{#                    data = $.parseJSON(data);#}
+{#                    var imageUrl = data.url;#}
+{#                    var li =#}
+{#                        "<li path='" +data.path+ "' url='" +data.url+ "' id='up-pic'>" +#}
+{#                        "<img src='" +imageUrl+ "'style='width:320px;height:200px;border:1px solid #c0c0c0'/>" +#}
+{#                        "<input type='hidden' name='logo' value='" +data.path+ "'/>" +#}
+{#                        "<a href='javascript:;' class='pic_del btn btn_info'><span>删除图片</span></a></li>";#}
+{#                    $("#uploadList ul").prepend(li);#}
+{#                }#}
+{#            });#}
+{#            <!-- 删除图片. -->#}
+{#            $('.pic_del').click(function() {#}
+{#                $(this).parent('li').remove();#}
+{#            });#}
+{#        });#}
+    </script>
+{% endblock %}
