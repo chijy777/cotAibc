@@ -49,7 +49,6 @@ class Books(models.Model):
     book_id = models.AutoField(primary_key=True)
     book_name = models.CharField(max_length=255, blank=True, null=True)
     author = models.CharField(max_length=255, blank=True, null=True)
-    # icon = models.CharField(max_length=255, blank=True, null=True)
     icon = models.ImageField(upload_to='books', max_length=255, blank=True, null=True)
     press = models.CharField(max_length=50, blank=True, null=True)
     pub_date = models.CharField(max_length=30, blank=True, null=True)
@@ -69,6 +68,10 @@ class Books(models.Model):
         managed = False
         db_table = 'books'
 
+    @property
+    def icon_url(self):
+        if self.icon and hasattr(self.icon, 'url'):
+            return self.icon.url
 
 
 class OrderLog(models.Model):

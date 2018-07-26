@@ -63,6 +63,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -116,14 +118,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 #     ('css',os.path.join(STATIC_ROOT,'css').replace('\\','/') ),
 #     ('js',os.path.join(STATIC_ROOT,'js').replace('\\','/') ),
 #     ('images',os.path.join(STATIC_ROOT,'images').replace('\\','/') ),
-#     ('upload',os.path.join(STATIC_ROOT,'upload').replace('\\','/') ),
 # )
 
+
+############### [自定义] ###############
 # [上传路径]配置
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media').replace('\\', '/') # media即为图片上传的根路径
-
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
 
 # [内容]配置，网站标题等
 WEBSITE_TITLE = u'Vmaig'

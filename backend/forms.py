@@ -11,7 +11,9 @@ class BookEditForm(forms.ModelForm):
     class Meta:
         model = Books
         fields = (
-            'book_id', 'book_name', 'author','icon', 'press', 'pub_date',
-            'pages', 'prices', 'isdn', 'brief', 'scores', 'douban_url',
+            'book_id', 'book_name', 'author',
+            'icon', 'press', 'pub_date',
+            'pages', 'prices', 'isdn',
+            'brief', 'scores', 'douban_url',
         )
 
