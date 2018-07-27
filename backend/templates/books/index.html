@@ -39,7 +39,8 @@
                     <tr>
                         <td class="center">{{ book.book_id }}</td>
                         <td class="center blue">
-                             <img src="{{ book.icon_url|default_if_none:'#' }}" style="width: 60px; height: 100px;"/>
+{#                            <img src="{{ book.icon_url|default_if_none:'#' }}" style="width: 60px; height: 100px;"/>#}
+                            <img src="{{ book.icon.url }}" style="width: 60px; height: 100px;"/>
                         </td>
                         <td class="center blue">
                             <a href="{{ book.douban_url }}" target="_blank" class="blue">{{ book.book_name }}</a>

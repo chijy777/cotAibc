@@ -124,8 +124,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 ############### [自定义] ###############
 # [上传路径]配置
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/').replace('\\', '/')
 
 # [内容]配置，网站标题等
 WEBSITE_TITLE = u'Vmaig'

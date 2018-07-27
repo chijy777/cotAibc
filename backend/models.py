@@ -68,10 +68,10 @@ class Books(models.Model):
         managed = False
         db_table = 'books'
 
-    @property
-    def icon_url(self):
-        if self.icon and hasattr(self.icon, 'url'):
-            return self.icon.url
+    # @property
+    # def icon_url(self):
+    #     if self.icon and hasattr(self.icon, 'url'):
+    #         return self.icon.url
 
 
 class OrderLog(models.Model):

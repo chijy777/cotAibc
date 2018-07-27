@@ -40,17 +40,13 @@ class BooksView(BaseMixin, ListView):
         return super(BooksView, self).get_context_data(**kwargs)
 
     def get_queryset(self):
-        book_list = Books.objects.filter(state=1)
-        # for book in book_list:
-        #     print(book, type(book))
-        #     print("==================>", book.icon.url)
-        return book_list
+        return Books.objects.filter(state=1)
 
     # @login_required
     @csrf_exempt
     def new(request):
         if request.method == 'POST':
-            form = BookEditForm(request.POST)
+            form = BookEditForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/backend/books/')
@@ -73,7 +69,7 @@ class BooksView(BaseMixin, ListView):
                 return HttpResponseRedirect('/backend/books/')
         else:
             form = BookEditForm(instance=book)
-        return render_to_response('books/edit.html', {'form': form, } )
+        return render_to_response('books/edit.html', {'form': form, 'book':book } )
 
 
 class BookcasesView(BaseMixin, ListView):

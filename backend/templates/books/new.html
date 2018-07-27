@@ -11,7 +11,7 @@
     </div>
 
     <div class="cont_box">
-        <form action="." method="POST">
+        <form action="." method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <ul class="addpro_box">
                 <li>
@@ -21,10 +21,6 @@
                 <li>
                     <label>作者：</label>
                     {{ form.author }}
-                </li>
-                <li>
-                    <label>小图标：</label>
-                    {{ form.icon }}
                 </li>
                 <li>
                     <label>出版社：</label>
@@ -57,6 +53,10 @@
                 <li>
                     <label>豆瓣链接：</label>
                     {{ form.douban_url }}
+                </li>
+                <li>
+                    <label>图片：</label>
+                    {{ form.icon }}
                 </li>
             </ul>
 
